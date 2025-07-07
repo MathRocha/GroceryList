@@ -1,0 +1,30 @@
+#header-toolbar {
+  justify-content: center;
+}
+
+main {
+  // 100% - header - footer
+  height: calc(100% - 56px - 112px);
+  overflow-y: auto;
+}
+
+#toolbar-buttons-row {
+  justify-content: space-between;
+}
+
+.mat-expansion-panel {
+  margin: 1em 0 !important;
+}
+
+.item-form-field {
+  width: 100%;
+}
+
+.amount-price {
+  display: flex;
+  column-gap: 1em;
+
+  mat-form-field {
+    width: 50%;
+  }
+}
