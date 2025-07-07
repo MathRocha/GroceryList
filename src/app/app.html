@@ -6,43 +6,66 @@
 
 <main>
   <mat-accordion>
-    <mat-expansion-panel expanded="true">
+    @for (itemGroup of itemsForm.controls; track itemGroup; let isFirstItem =
+    $first ) {
+    <mat-expansion-panel [expanded]="isFirstItem">
       <mat-expansion-panel-header>
-        <mat-panel-title> Item (TODO: get item name) </mat-panel-title>
+        <mat-panel-title>
+          {{ itemGroup.get("name")?.value || "Item" }}
+        </mat-panel-title>
         <mat-panel-description>
-          Total: TODO: get item total
+          {{
+            itemGroup.get("total")?.value
+              ? "Total: " + itemGroup.get("total")?.value
+              : ""
+          }}
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <form>
+      <form [formGroup]="itemGroup">
         <mat-form-field class="item-form-field">
           <mat-label>Item</mat-label>
-          <input matInput placeholder="Ex. Milk" />
+          <input matInput placeholder="Ex. Milk" formControlName="name" />
         </mat-form-field>
 
         <div class="amount-price">
           <mat-form-field>
             <mat-label>Amount</mat-label>
-            <input matInput placeholder="Ex. 2" type="number" />
+            <input
+              matInput
+              placeholder="Ex. 2"
+              type="number"
+              formControlName="amount"
+            />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Price</mat-label>
             <span matTextPrefix>$</span>
-            <input matInput placeholder="Ex. 10.50" type="number" />
+            <input
+              matInput
+              placeholder="Ex. 10.50"
+              type="number"
+              formControlName="price"
+            />
           </mat-form-field>
         </div>
       </form>
     </mat-expansion-panel>
+    }
   </mat-accordion>
 </main>
 
 <footer>
   <mat-toolbar>
-    <mat-toolbar-row>Total: TODO</mat-toolbar-row>
+    <mat-toolbar-row>Total: {{ total }}</mat-toolbar-row>
     <mat-toolbar-row id="toolbar-buttons-row">
-      <button matButton="filled"><mat-icon>clear</mat-icon> Clear list</button>
-      <button matButton="filled"><mat-icon>add</mat-icon> Add item</button>
+      <button matButton="filled" (click)="clearList()">
+        <mat-icon>clear</mat-icon> Clear list
+      </button>
+      <button matButton="filled" (click)="addItem()">
+        <mat-icon>add</mat-icon> Add item
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </footer>
