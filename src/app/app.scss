@@ -1,3 +1,5 @@
+@use "@angular/material" as mat;
+
 #header-toolbar {
   justify-content: center;
 }
@@ -16,6 +18,12 @@ main {
   margin: 1em 0 !important;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
 .item-form-field {
   width: 100%;
 }
@@ -27,4 +35,14 @@ main {
   mat-form-field {
     width: 50%;
   }
+}
+
+.invalid-panel {
+  @include mat.expansion-overrides(
+    (
+      header-text-color: var(--mat-sys-error),
+      header-description-color: var(--mat-sys-error),
+      header-indicator-color: var(--mat-sys-error),
+    )
+  );
 }

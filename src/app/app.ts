@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -27,6 +28,7 @@ import { debounceTime } from 'rxjs';
     MatToolbarModule,
     ReactiveFormsModule,
     FormsModule,
+    CurrencyPipe,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -63,10 +65,10 @@ export class App implements OnInit {
 
   private get itemGroup() {
     return new FormGroup({
-      name: new FormControl<string>('', Validators.required),
-      amount: new FormControl<number>(0, Validators.required),
-      price: new FormControl<number>(0, Validators.required),
-      total: new FormControl<number>(0, Validators.required),
+      name: new FormControl<string | null>(null, Validators.required),
+      amount: new FormControl<number | null>(null, Validators.required),
+      price: new FormControl<number | null>(null, Validators.required),
+      total: new FormControl<number | null>(null),
     });
   }
 
