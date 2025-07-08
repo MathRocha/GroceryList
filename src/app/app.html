@@ -68,17 +68,13 @@
 </main>
 
 <footer>
-  <mat-toolbar>
+  <mat-toolbar id="footer-toolbar">
     <mat-toolbar-row>
       Total: {{ itemsForm.get("total")!.value | currency }}
     </mat-toolbar-row>
     <mat-toolbar-row id="toolbar-buttons-row">
-      <button matButton="filled" (click)="clearList()">
-        <mat-icon>clear</mat-icon> Clear list
-      </button>
-      <button matButton="filled" (click)="addItem()">
-        <mat-icon>add</mat-icon> Add item
-      </button>
+      <button matButton="filled" (click)="clearList()">Clear list</button>
+      <button matButton="filled" (click)="addItem()">Add item</button>
     </mat-toolbar-row>
   </mat-toolbar>
 </footer>
