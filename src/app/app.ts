@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -9,12 +9,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { debounceTime } from 'rxjs';
+import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +40,7 @@ export class App implements OnInit {
     items: new FormArray([this.itemGroup]),
     total: new FormControl<number>(0),
   });
+  readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.retrieveData();
@@ -89,9 +92,18 @@ export class App implements OnInit {
   }
 
   clearList(): void {
-    this.itemsArray.clear();
-    this.itemsForm.get('total')?.setValue(0);
-    this.addItem();
+    this.dialog
+      .open(ConfirmationDialog)
+      .afterClosed()
+      .subscribe({
+        next: (response: boolean) => {
+          if (response) {
+            this.itemsArray.clear();
+            this.itemsForm.get('total')?.setValue(0);
+            this.addItem();
+          }
+        },
+      });
   }
 
   addItem(): void {
