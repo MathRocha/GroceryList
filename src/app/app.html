@@ -6,7 +6,7 @@
 
 <main>
   <mat-accordion>
-    @for (itemGroup of itemsForm.controls; track itemGroup; let isFirstItem =
+    @for (itemGroup of itemsArray.controls; track itemGroup; let isFirstItem =
     $first ) {
     <mat-expansion-panel [expanded]="isFirstItem">
       <mat-expansion-panel-header
@@ -69,7 +69,9 @@
 
 <footer>
   <mat-toolbar>
-    <mat-toolbar-row>Total: {{ total | currency }}</mat-toolbar-row>
+    <mat-toolbar-row>
+      Total: {{ itemsForm.get("total")!.value | currency }}
+    </mat-toolbar-row>
     <mat-toolbar-row id="toolbar-buttons-row">
       <button matButton="filled" (click)="clearList()">
         <mat-icon>clear</mat-icon> Clear list

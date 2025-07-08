@@ -34,17 +34,17 @@ import { debounceTime } from 'rxjs';
   styleUrl: './app.scss',
 })
 export class App implements OnInit {
-  itemsForm = new FormArray([this.itemGroup]);
-  total = 0;
+  itemsForm = new FormGroup({
+    items: new FormArray([this.itemGroup]),
+    total: new FormControl<number>(0),
+  });
 
   ngOnInit(): void {
-    console.log(this.itemsForm);
+    this.retrieveData();
 
     this.itemsForm.valueChanges.pipe(debounceTime(250)).subscribe({
-      next: (value) => {
-        console.log(value);
-        console.log(this.itemsForm);
-        this.itemsForm.controls.forEach((control) => {
+      next: () => {
+        this.itemsArray.controls.forEach((control) => {
           if (control.get('amount')!.valid && control.get('price')!.valid) {
             control
               .get('total')!
@@ -55,12 +55,28 @@ export class App implements OnInit {
           }
         });
 
-        this.total = this.itemsForm.controls.reduce(
-          (acc, cur) => acc + cur.get('total')!.value!,
-          0
+        this.itemsForm.get('total')?.setValue(
+          this.itemsArray.controls.reduce(
+            (acc, cur) => acc + cur.get('total')!.value!,
+            0
+          ),
+          { emitEvent: false }
         );
+
+        this.storeData();
       },
     });
+  }
+
+  get itemsArray() {
+    return this.itemsForm.get('items') as FormArray<
+      FormGroup<{
+        name: FormControl<string | null>;
+        amount: FormControl<number | null>;
+        price: FormControl<number | null>;
+        total: FormControl<number | null>;
+      }>
+    >;
   }
 
   private get itemGroup() {
@@ -68,15 +84,28 @@ export class App implements OnInit {
       name: new FormControl<string | null>(null, Validators.required),
       amount: new FormControl<number | null>(null, Validators.required),
       price: new FormControl<number | null>(null, Validators.required),
-      total: new FormControl<number | null>(null),
+      total: new FormControl<number | null>(0),
     });
   }
 
   clearList(): void {
-    this.itemsForm = new FormArray([this.itemGroup]);
+    this.itemsArray.clear();
+    this.itemsForm.get('total')?.setValue(0);
+    this.addItem();
   }
 
   addItem(): void {
-    this.itemsForm.push(this.itemGroup);
+    this.itemsArray.push(this.itemGroup);
+  }
+
+  private storeData(): void {
+    localStorage.setItem('formData', JSON.stringify(this.itemsForm.value));
+  }
+
+  private retrieveData() {
+    const data = JSON.parse(localStorage.getItem('formData') || '');
+    if (data) {
+      this.itemsForm.setValue(data, { emitEvent: false });
+    }
   }
 }
