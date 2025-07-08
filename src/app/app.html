@@ -1,6 +1,14 @@
 <header>
   <mat-toolbar id="header-toolbar">
     <h1>Grocery List</h1>
+
+    <button matIconButton (click)="toggleMode()">
+      @if (lightMode) {
+      <mat-icon>dark_mode</mat-icon>
+      } @else {
+      <mat-icon>light_mode</mat-icon>
+      }
+    </button>
   </mat-toolbar>
 </header>
 

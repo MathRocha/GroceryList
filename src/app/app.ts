@@ -40,6 +40,7 @@ export class App implements OnInit {
     items: new FormArray([this.itemGroup]),
     total: new FormControl<number>(0),
   });
+  lightMode = document.body.classList.contains('lightmode');
   readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
@@ -108,6 +109,17 @@ export class App implements OnInit {
 
   addItem(): void {
     this.itemsArray.push(this.itemGroup);
+  }
+
+  toggleMode() {
+    this.lightMode = !this.lightMode;
+    if (this.lightMode) {
+      document.body.classList.add('lightmode');
+      localStorage.setItem('lightmode', 'true');
+    } else {
+      document.body.classList.remove('lightmode');
+      localStorage.removeItem('lightmode');
+    }
   }
 
   private storeData(): void {
