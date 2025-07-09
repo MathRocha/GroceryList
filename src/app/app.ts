@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { debounceTime } from 'rxjs';
 import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
+import { ItemForm } from './interfaces/item';
 
 @Component({
   selector: 'app-root',
@@ -127,8 +128,14 @@ export class App implements OnInit {
   }
 
   private retrieveData() {
-    const data = JSON.parse(localStorage.getItem('formData') || '');
+    const data: ItemForm = JSON.parse(localStorage.getItem('formData') || '');
     if (data) {
+      if (data.items.length > 1) {
+        // Add extra groups inside the form array so values can be setted
+        for (let i = 1; i < data.items.length; i++) {
+          this.itemsArray.push(this.itemGroup);
+        }
+      }
       this.itemsForm.setValue(data, { emitEvent: false });
     }
   }
