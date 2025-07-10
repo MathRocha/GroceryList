@@ -5,6 +5,14 @@
   "projects": {
     "GroceryList": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "pt": {
+            "translation": "src/locale/messages.pt.xlf"
+          }
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -18,7 +26,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -26,7 +34,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/theme.scss", "src/styles.scss"]
+            "styles": ["src/theme.scss", "src/styles.scss"],
+            "localize": true,
+            "i18nMissingTranslation": "error"
           },
           "configurations": {
             "production": {
@@ -48,6 +58,9 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "pt": {
+              "localize": ["pt"]
             }
           },
           "defaultConfiguration": "production"
@@ -60,6 +73,9 @@
             },
             "development": {
               "buildTarget": "GroceryList:build:development"
+            },
+            "pt": {
+              "buildTarget": "GroceryList:build:development,pt"
             }
           },
           "defaultConfiguration": "development"
@@ -70,7 +86,11 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -83,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

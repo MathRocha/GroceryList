@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { debounceTime } from 'rxjs';
 import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
-import { ItemForm } from './interfaces/item';
+import { ItemForm } from '../interfaces/item';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,7 @@ import { ItemForm } from './interfaces/item';
     MatToolbarModule,
     ReactiveFormsModule,
     FormsModule,
-    CurrencyPipe,
+    DecimalPipe,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -128,7 +128,9 @@ export class App implements OnInit {
   }
 
   private retrieveData() {
-    const data: ItemForm = JSON.parse(localStorage.getItem('formData') || '');
+    const data: ItemForm = JSON.parse(
+      localStorage.getItem('formData') || 'false'
+    );
     if (data) {
       if (data.items.length > 1) {
         // Add extra groups inside the form array so values can be setted

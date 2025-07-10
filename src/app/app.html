@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar id="header-toolbar">
-    <h1>Grocery List</h1>
+    <h1 i18n="site header|The title of the website@@title">Grocery List</h1>
 
     <button matIconButton (click)="toggleMode()">
       @if (lightMode) {
@@ -15,7 +15,7 @@
 <main>
   <mat-accordion>
     @for (itemGroup of itemsArray.controls; track itemGroup; let isFirstItem =
-    $first ) {
+    $first) {
     <mat-expansion-panel [expanded]="isFirstItem">
       <mat-expansion-panel-header
         [class]="itemGroup.valid ? '' : 'invalid-panel'"
@@ -24,48 +24,83 @@
           {{ itemGroup.get("name")?.value || "Item" }}
         </mat-panel-title>
         <mat-panel-description>
-          {{
-            itemGroup.get("total")?.value
-              ? "Total: " + (itemGroup.get("total")?.value | currency)
-              : ""
-          }}
+          @if (itemGroup.get("total")?.value) {
+          <span i18n="item total|Total price of the item@@item-total">
+            Total: $
+          </span>
+          {{ itemGroup.get("total")?.value | number : "1.2-2" }}
+          }
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <form [formGroup]="itemGroup">
         <mat-form-field class="item-form-field">
-          <mat-label>Item</mat-label>
-          <input matInput placeholder="Ex. Milk" formControlName="name" />
+          <mat-label i18n="item label|Label for item@@item-label">
+            Item
+          </mat-label>
+          <input
+            matInput
+            placeholder="Ex. Milk"
+            i18n-placeholder="
+              item placeholder|An example of an item@@item-placeholder"
+            formControlName="name"
+          />
           @if(itemGroup.get('name')?.hasError('required')) {
-          <mat-error>Item is required</mat-error>
+          <mat-error
+            i18n="
+              item required error message|An error message saying that the item
+              is required@@item-required"
+          >
+            Item is required
+          </mat-error>
           }
         </mat-form-field>
 
         <div class="amount-price">
           <mat-form-field>
-            <mat-label>Amount</mat-label>
+            <mat-label i18n="amount label|Label for amount@@amount-label">
+              Amount
+            </mat-label>
             <input
               matInput
               placeholder="Ex. 2"
+              i18n-placeholder="
+                amount placeholder|An example of an amount@@amount-placeholder"
               type="number"
               formControlName="amount"
             />
             @if(itemGroup.get('amount')?.hasError('required')) {
-            <mat-error>Amount is required</mat-error>
+            <mat-error
+              i18n="
+                amount required error message|An error message saying that the
+                amount is required@@amount-required"
+            >
+              Amount is required
+            </mat-error>
             }
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Price</mat-label>
-            <span matTextPrefix>$</span>
+            <mat-label i18n="price label|Label for price@@price-label">
+              Price
+            </mat-label>
+            <span matTextPrefix i18n>$</span>
             <input
               matInput
               placeholder="Ex. 10.50"
+              i18n-placeholder="
+                price placeholder|An example of an price@@price-placeholder"
               type="number"
               formControlName="price"
             />
             @if(itemGroup.get('price')?.hasError('required')) {
-            <mat-error>Price is required</mat-error>
+            <mat-error
+              i18n="
+                price required error message|An error message saying that the
+                price is required@@price-required"
+            >
+              Price is required
+            </mat-error>
             }
           </mat-form-field>
         </div>
@@ -78,11 +113,34 @@
 <footer>
   <mat-toolbar id="footer-toolbar">
     <mat-toolbar-row>
-      Total: {{ itemsForm.get("total")!.value | currency }}
+      <span
+        i18n="
+          total text|Text on footer that indicates the total price of the
+          list@@total-footer-text"
+      >
+        Total: $
+      </span>
+      {{ itemsForm.get("total")!.value | number : "1.2-2" }}
     </mat-toolbar-row>
     <mat-toolbar-row id="toolbar-buttons-row">
-      <button matButton="filled" (click)="clearList()">Clear list</button>
-      <button matButton="filled" (click)="addItem()">Add item</button>
+      <button
+        matButton="filled"
+        i18n="
+          clear list button text|Text inside the button that clears the
+          list@@btn-clear-list"
+        (click)="clearList()"
+      >
+        Clear list
+      </button>
+      <button
+        matButton="filled"
+        i18n="
+          add item button text|Text inside the button that add an item to the
+          list@@btn-add-item"
+        (click)="addItem()"
+      >
+        Add item
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </footer>

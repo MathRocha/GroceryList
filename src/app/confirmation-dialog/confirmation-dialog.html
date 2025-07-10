@@ -1,10 +1,38 @@
-<h2 mat-dialog-title>Clear list</h2>
+<h2
+  mat-dialog-title
+  i18n="
+    confirmation dialog title|Title of the confirmation
+    dialog@@confirmation-dialog-title"
+>
+  Clear list
+</h2>
 
-<mat-dialog-content>
+<mat-dialog-content
+  i18n="
+    confirmation dialog content|Content of the confirmation
+    dialog@@confirmation-dialog-content"
+>
   Are you sure you want to clear the list?
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button matButton [mat-dialog-close]="false">No</button>
-  <button matButton [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+  <button
+    matButton
+    i18n="
+      confirmation dialog no button|Button that reject the
+      dialog@@confirmation-dialog-no-btn"
+    [mat-dialog-close]="false"
+  >
+    No
+  </button>
+  <button
+    matButton
+    i18n="
+      confirmation dialog yes button|Button that confirms the
+      dialog@@confirmation-dialog-yes-btn"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    Yes
+  </button>
 </mat-dialog-actions>
