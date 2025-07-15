@@ -84,7 +84,14 @@
             <mat-label i18n="price label|Label for price@@price-label">
               Price
             </mat-label>
-            <span matTextPrefix i18n>$</span>
+            <span
+              matTextPrefix
+              i18n="
+                price prefix|Prefix for the price, dollar sign@@price-prefix"
+              class="price-prefix"
+            >
+              $
+            </span>
             <input
               matInput
               placeholder="Ex. 10.50"

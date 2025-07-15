@@ -85,18 +85,20 @@
         <note priority="1" from="description">Label for price</note>
         <note priority="1" from="meaning">price label</note>
       </trans-unit>
-      <trans-unit id="2292815126485835071" datatype="html">
-        <source>$</source>
+      <trans-unit id="price-prefix" datatype="html">
+        <source> $ </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.html</context>
-          <context context-type="linenumber">87,88</context>
+          <context context-type="linenumber">93,96</context>
         </context-group>
+        <note priority="1" from="description">Prefix for the price, dollar sign</note>
+        <note priority="1" from="meaning">price prefix</note>
       </trans-unit>
       <trans-unit id="price-placeholder" datatype="html">
         <source>Ex. 10.50</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.html</context>
-          <context context-type="linenumber">90,92</context>
+          <context context-type="linenumber">97,99</context>
         </context-group>
         <note priority="1" from="description">An example of an price</note>
         <note priority="1" from="meaning">price placeholder</note>
@@ -105,7 +107,7 @@
         <source> Price is required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.html</context>
-          <context context-type="linenumber">102,108</context>
+          <context context-type="linenumber">109,115</context>
         </context-group>
         <note priority="1" from="description">An error message saying that the
                 price is required</note>
@@ -115,7 +117,7 @@
         <source> Total: $ </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.html</context>
-          <context context-type="linenumber">121,124</context>
+          <context context-type="linenumber">128,131</context>
         </context-group>
         <note priority="1" from="description">Text on footer that indicates the total price of the
           list</note>
@@ -125,7 +127,7 @@
         <source> Clear list </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.html</context>
-          <context context-type="linenumber">133,138</context>
+          <context context-type="linenumber">140,145</context>
         </context-group>
         <note priority="1" from="description">Text inside the button that clears the
           list</note>
@@ -135,7 +137,7 @@
         <source> Add item </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.html</context>
-          <context context-type="linenumber">142,147</context>
+          <context context-type="linenumber">149,154</context>
         </context-group>
         <note priority="1" from="description">Text inside the button that add an item to the
           list</note>
@@ -157,7 +159,7 @@
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/confirmation-dialog/confirmation-dialog.html</context>
-          <context context-type="linenumber">15,18</context>
+          <context context-type="linenumber">15,22</context>
         </context-group>
         <note priority="1" from="description">Content of the confirmation
     dialog</note>
@@ -167,7 +169,7 @@
         <source> No </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/confirmation-dialog/confirmation-dialog.html</context>
-          <context context-type="linenumber">27,32</context>
+          <context context-type="linenumber">26,31</context>
         </context-group>
         <note priority="1" from="description">Button that reject the
       dialog</note>
@@ -177,7 +179,7 @@
         <source> Yes </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/confirmation-dialog/confirmation-dialog.html</context>
-          <context context-type="linenumber">37,40</context>
+          <context context-type="linenumber">36,39</context>
         </context-group>
         <note priority="1" from="description">Button that confirms the
       dialog</note>
