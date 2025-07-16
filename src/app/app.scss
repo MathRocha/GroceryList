@@ -6,12 +6,13 @@ $footer-height: 112px;
 #header-toolbar {
   justify-content: center;
   height: $header-height !important;
-  background: var(--mat-sys-primary-container);
-  color: var(--mat-sys-on-primary-container);
 }
 
 #footer-toolbar {
   height: $footer-height !important;
+}
+
+.mat-toolbar {
   background: var(--mat-sys-primary-container);
   color: var(--mat-sys-on-primary-container);
 }
@@ -27,8 +28,8 @@ main {
 
 .mat-expansion-panel {
   margin: 1em 0 !important;
-  background: var(--mat-sys-tertiary-container);
-  color: var(--mat-sys-on-tertiary-container);
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface-container);
 }
 
 form {
