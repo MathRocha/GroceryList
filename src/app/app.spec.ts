@@ -16,9 +16,7 @@ describe('App', () => {
     await TestBed.configureTestingModule({
       imports: [App],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(App);
     component = fixture.componentInstance;
     fixture.detectChanges();
